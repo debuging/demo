@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF" monitorInterval="120">
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%X{sessionId}] [%X{userId}] (%F:%L): %msg%n"/>
+        </Console>
+
+        <RollingFile name="file" fileName="/usr/logs/mobile/mobile.log" filePattern="/usr/logs/mobile/mobile.log.%d{yyyy-MM-dd}.log" ignoreExceptions="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%X{sessionId}] [%X{userId}] (%F:%L): %msg%n"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingFile>
+
+        <RollingFile name="error" fileName="/usr/logs/mobile/mobile-error.log" filePattern="/usr/logs/mobile/mobile-error.log.%d{yyyy-MM-dd}.log" ignoreExceptions="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%X{sessionId}] [%X{userId}] %l: %msg%n"/>
+            <TimeBasedTriggeringPolicy/>
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.syyg" level="debug" additivity="true"/>
+        <Logger name="org.treeleaf" level="debug" additivity="true"/>
+
+        <Root level="warn">
+            <!--<AppenderRef ref="file"/>-->
+            <!--<AppenderRef ref="error"/>-->
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</configuration>
